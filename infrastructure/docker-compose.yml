@@ -85,7 +85,7 @@ services:
     restart: unless-stopped
 
   prometheus:
-    image: prom/prometheus:v2.54.1
+    image: prom/prometheus:v3.14.0
     container_name: telegram-framework-prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
