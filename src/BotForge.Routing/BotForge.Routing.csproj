@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Attribute-driven update routing for BotForge — commands, callback queries, text, media and every other update type — with a middleware pipeline for authorization, conversation state, rate limiting and localization.</Description>
+        <PackageTags>telegram;telegram-bot;bot;routing;middleware;commands;handlers</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RootNamespace>BotForge.Routing</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+        <ProjectReference Include="..\BotForge.Routing.Abstractions\BotForge.Routing.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
+    </ItemGroup>
+</Project>

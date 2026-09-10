@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Outbound messaging for BotForge — a fluent message and keyboard builder, an in-memory queue, and a send pipeline with rate limiting, retries, a circuit breaker and metrics.</Description>
+        <PackageTags>telegram;telegram-bot;bot;messaging;keyboards;rate-limiting;resilience</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+        <ProjectReference Include="..\BotForge.Messaging.Abstractions\BotForge.Messaging.Abstractions.csproj"/>
+        <ProjectReference Include="..\BotForge.RateLimiting.Abstractions\BotForge.RateLimiting.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Http"/>
+        <PackageReference Include="Polly.Core"/>
+        <PackageReference Include="System.Threading.RateLimiting"/>
+    </ItemGroup>
+</Project>

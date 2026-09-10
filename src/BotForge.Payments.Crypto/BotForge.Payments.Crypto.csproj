@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>TON payments for BotForge, via toncenter and TonConnect deep links.</Description>
+        <PackageTags>telegram;telegram-bot;bot;payments;ton;crypto;tonconnect</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Payments.Abstractions\BotForge.Payments.Abstractions.csproj"/>
+        <ProjectReference Include="..\BotForge.Payments\BotForge.Payments.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Http"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
+    </ItemGroup>
+</Project>

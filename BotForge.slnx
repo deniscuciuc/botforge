@@ -1,0 +1,61 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BotForge.Consumer/BotForge.Consumer.csproj" />
+    <Project Path="src/BotForge.Contracts/BotForge.Contracts.csproj" />
+    <Project Path="src/BotForge.Core/BotForge.Core.csproj" />
+    <Project Path="src/BotForge.Hosting/BotForge.Hosting.csproj" />
+    <Project Path="src/BotForge.Messaging.Abstractions/BotForge.Messaging.Abstractions.csproj" />
+    <Project Path="src/BotForge.Messaging/BotForge.Messaging.csproj" />
+    <Project Path="src/BotForge.Messaging.MassTransit/BotForge.Messaging.MassTransit.csproj" />
+    <Project Path="src/BotForge.Observability/BotForge.Observability.csproj" />
+    <Project Path="src/BotForge.Payments.Abstractions/BotForge.Payments.Abstractions.csproj" />
+    <Project Path="src/BotForge.Payments/BotForge.Payments.csproj" />
+    <Project Path="src/BotForge.Payments.Crypto/BotForge.Payments.Crypto.csproj" />
+    <Project Path="src/BotForge.Payments.Fragment/BotForge.Payments.Fragment.csproj" />
+    <Project Path="src/BotForge.RateLimiting.Abstractions/BotForge.RateLimiting.Abstractions.csproj" />
+    <Project Path="src/BotForge.RateLimiting.Redis/BotForge.RateLimiting.Redis.csproj" />
+    <Project Path="src/BotForge.Routing.Abstractions/BotForge.Routing.Abstractions.csproj" />
+    <Project Path="src/BotForge.Routing/BotForge.Routing.csproj" />
+    <Project Path="src/BotForge.Streaming/BotForge.Streaming.csproj" />
+    <Project Path="src/BotForge.Templates/BotForge.Templates.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BotForge.Docs.Snippets/BotForge.Docs.Snippets.csproj" />
+    <Project Path="tests/BotForge.Payments.Tests/BotForge.Payments.Tests.csproj" />
+    <Project Path="tests/BotForge.Core.Tests/BotForge.Core.Tests.csproj" />
+    <Project Path="tests/BotForge.Integration.Tests/BotForge.Integration.Tests.csproj" />
+    <Project Path="tests/BotForge.Messaging.Tests/BotForge.Messaging.Tests.csproj" />
+    <Project Path="tests/BotForge.Routing.Tests/BotForge.Routing.Tests.csproj" />
+    <Project Path="tests/BotForge.Streaming.Tests/BotForge.Streaming.Tests.csproj" />
+    <Project Path="tests/BotForge.Templates.Tests/BotForge.Templates.Tests.csproj" />
+    <Project Path="tests/BotForge.TestUtilities/BotForge.TestUtilities.csproj" />
+  </Folder>
+  <Folder Name="/examples/">
+    <Project Path="examples/AdvancedBot/AdvancedBot.csproj" />
+    <Project Path="examples/CommandBot/CommandBot.csproj" />
+    <Project Path="examples/ConversationBot/ConversationBot.csproj" />
+    <Project Path="examples/CryptoShop/CryptoShop.csproj" />
+    <Project Path="examples/DiceMiniGames/DiceMiniGames.csproj" />
+    <Project Path="examples/EchoBot/EchoBot.csproj" />
+    <Project Path="examples/GiftCommerceBot/GiftCommerceBot.csproj" />
+    <Project Path="examples/InlineBot/InlineBot.csproj" />
+    <Project Path="examples/InlineKeyboardBot/InlineKeyboardBot.csproj" />
+    <Project Path="examples/MediaBot/MediaBot.csproj" />
+    <Project Path="examples/MultiLanguageBot/MultiLanguageBot.csproj" />
+    <Project Path="examples/RequestSelectionBot/RequestSelectionBot.csproj" />
+    <Project Path="examples/StreamingBot/StreamingBot.csproj" />
+    <Project Path="examples/TelegramShop/TelegramShop.csproj" />
+    <Project Path="examples/WebhookBot/WebhookBot.csproj" />
+  </Folder>
+  <Folder Name="/services/">
+    <Project Path="services/BotForge.Ingress/BotForge.Ingress.csproj" />
+    <Project Path="services/BotForge.Sender/BotForge.Sender.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/BotForge.Analyzers/BotForge.Analyzers.csproj" />
+    <Project Path="tools/BotForge.ApiProbe/BotForge.ApiProbe.csproj" />
+    <Project Path="tools/BotForge.DotNetTemplates/BotForge.DotNetTemplates.csproj" />
+    <Project Path="tools/BotForge.Mcp/BotForge.Mcp.csproj" />
+    <Project Path="tools/BotForge.Templates.Benchmarks/BotForge.Templates.Benchmarks.csproj" />
+  </Folder>
+</Solution>

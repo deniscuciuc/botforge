@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Host wiring for BotForge. AddTelegramMonolithHost composes ingress, routing and sending in one call; separate ingress and sender hosts are available for a split deployment.</Description>
+        <PackageTags>telegram;telegram-bot;bot;hosting;webhook;dependency-injection</PackageTags>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <RootNamespace>BotForge.Hosting</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+        <ProjectReference Include="..\BotForge.Contracts\BotForge.Contracts.csproj"/>
+        <ProjectReference Include="..\BotForge.Consumer\BotForge.Consumer.csproj"/>
+        <ProjectReference Include="..\BotForge.Messaging\BotForge.Messaging.csproj"/>
+        <ProjectReference Include="..\BotForge.Messaging.Abstractions\BotForge.Messaging.Abstractions.csproj"/>
+        <ProjectReference Include="..\BotForge.Messaging.MassTransit\BotForge.Messaging.MassTransit.csproj"/>
+        <ProjectReference Include="..\BotForge.Routing\BotForge.Routing.csproj"/>
+        <ProjectReference Include="..\BotForge.Routing.Abstractions\BotForge.Routing.Abstractions.csproj"/>
+        <ProjectReference Include="..\BotForge.Observability\BotForge.Observability.csproj"/>
+        <ProjectReference Include="..\BotForge.RateLimiting.Abstractions\BotForge.RateLimiting.Abstractions.csproj"/>
+        <ProjectReference Include="..\BotForge.RateLimiting.Redis\BotForge.RateLimiting.Redis.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MassTransit"/>
+        <PackageReference Include="MassTransit.RabbitMQ"/>
+        <PackageReference Include="StackExchange.Redis"/>
+    </ItemGroup>
+
+</Project>

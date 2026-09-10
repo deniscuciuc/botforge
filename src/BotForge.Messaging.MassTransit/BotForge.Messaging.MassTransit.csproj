@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>MassTransit queue backend for BotForge, for outbox-style delivery of outbound Telegram messages over RabbitMQ.</Description>
+        <PackageTags>telegram;telegram-bot;bot;masstransit;rabbitmq;messaging</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RootNamespace>BotForge.Messaging.MassTransit</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+        <ProjectReference Include="..\BotForge.Messaging.Abstractions\BotForge.Messaging.Abstractions.csproj"/>
+        <ProjectReference Include="..\BotForge.Messaging\BotForge.Messaging.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MassTransit"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+    </ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Rate-limiting contracts for BotForge.</Description>
+        <PackageTags>telegram;telegram-bot;bot;rate-limiting;abstractions</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RootNamespace>BotForge.RateLimiting.Abstractions</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+    </ItemGroup>
+</Project>

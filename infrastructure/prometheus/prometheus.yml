@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "botforge-telegram-local"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          # Worker mode on host machine (default AddTelegramObservability URI)
+          - host.docker.internal:9464
+
+  - job_name: "botforge-telegram-docker"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          # Use this when bot service runs in the same compose network
+          - advancedbot:9464

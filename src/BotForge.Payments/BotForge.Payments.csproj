@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Payments for BotForge — invoices, pre-checkout validation, payment processing, refunds, subscriptions, Telegram Stars, gifts, paid media, an anti-fraud pipeline and payouts.</Description>
+        <PackageTags>telegram;telegram-bot;bot;payments;telegram-stars;invoices;refunds;subscriptions</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Payments.Abstractions\BotForge.Payments.Abstractions.csproj"/>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+    </ItemGroup>
+</Project>

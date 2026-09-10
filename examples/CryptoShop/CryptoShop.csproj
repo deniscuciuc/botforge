@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\BotForge.Messaging\BotForge.Messaging.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Routing\BotForge.Routing.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Consumer\BotForge.Consumer.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Payments\BotForge.Payments.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Payments.Crypto\BotForge.Payments.Crypto.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
+    </ItemGroup>
+</Project>

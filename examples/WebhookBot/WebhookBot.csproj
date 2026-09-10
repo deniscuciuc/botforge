@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\BotForge.Messaging\BotForge.Messaging.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Routing\BotForge.Routing.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Consumer\BotForge.Consumer.csproj"/>
+    </ItemGroup>
+</Project>

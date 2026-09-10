@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Routing contracts for BotForge: handler interfaces, routing attributes and the authorization model. Reference this from a project that defines handlers without hosting them.</Description>
+        <PackageTags>telegram;telegram-bot;bot;routing;abstractions</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+    </ItemGroup>
+</Project>

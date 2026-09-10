@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsTestProject>false</IsTestProject>
+        <!-- Shipped: consumers use these fakes to test their own handlers. -->
+        <IsPackable>true</IsPackable>
+        <Description>Test doubles for BotForge — a fake Telegram bot client that records what was sent, an update factory, and a metric-capture listener. Assertion-framework agnostic.</Description>
+        <PackageTags>telegram;telegram-bot;bot;testing;test-doubles;fakes</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\BotForge.Core\BotForge.Core.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Messaging.Abstractions\BotForge.Messaging.Abstractions.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+        <!-- The fake client is built with NSubstitute; no assertion framework is pulled in. -->
+        <PackageReference Include="NSubstitute"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="" />
+        <None Include="$(MSBuildThisFileDirectory)../../assets/icon.png" Pack="true" PackagePath="" Visible="false"
+              Condition="Exists('$(MSBuildThisFileDirectory)../../assets/icon.png')" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Message contracts shared between a BotForge ingress process and a sender process when the two are deployed separately.</Description>
+        <PackageTags>telegram;telegram-bot;bot;contracts;messaging</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Update ingress for BotForge: a long-polling consumer, a bounded update channel and the worker loop that drains it.</Description>
+        <PackageTags>telegram;telegram-bot;bot;long-polling;consumer</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RootNamespace>BotForge.Consumer</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.Core\BotForge.Core.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions"/>
+    </ItemGroup>
+</Project>

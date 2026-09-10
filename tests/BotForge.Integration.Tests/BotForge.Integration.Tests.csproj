@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\BotForge.Core\BotForge.Core.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Contracts\BotForge.Contracts.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Hosting\BotForge.Hosting.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Messaging\BotForge.Messaging.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Messaging.Abstractions\BotForge.Messaging.Abstractions.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Messaging.MassTransit\BotForge.Messaging.MassTransit.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Routing\BotForge.Routing.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Consumer\BotForge.Consumer.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.RateLimiting.Redis\BotForge.RateLimiting.Redis.csproj"/>
+        <ProjectReference Include="..\BotForge.TestUtilities\BotForge.TestUtilities.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="NSubstitute"/>
+        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="Testcontainers"/>
+        <PackageReference Include="Testcontainers.RabbitMq"/>
+        <PackageReference Include="Testcontainers.Redis"/>
+        <PackageReference Include="WireMock.Net"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="MassTransit.RabbitMQ"/>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Redis-backed per-user rate limiting for BotForge, so limits hold across every instance rather than per process.</Description>
+        <PackageTags>telegram;telegram-bot;bot;rate-limiting;redis</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RootNamespace>BotForge.RateLimiting.Redis</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BotForge.RateLimiting.Abstractions\BotForge.RateLimiting.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="StackExchange.Redis"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+    </ItemGroup>
+</Project>

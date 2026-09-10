@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\BotForge.Core\BotForge.Core.csproj"/>
+        <ProjectReference Include="..\..\src\BotForge.Payments\BotForge.Payments.csproj"/>
+        <ProjectReference Include="..\BotForge.TestUtilities\BotForge.TestUtilities.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="NSubstitute"/>
+        <PackageReference Include="coverlet.collector"/>
+    </ItemGroup>
+
+</Project>
