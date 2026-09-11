@@ -1,0 +1,130 @@
+version: "3.9"
+
+services:
+  ingress:
+    build:
+      context: ..
+      dockerfile: services/TeleForge.Ingress/Dockerfile
+    container_name: telegram-ingress
+    environment:
+      - Telegram__Bots__0__Key=main
+      - Telegram__Bots__0__Token=${BOT_TOKEN:-YOUR_BOT_TOKEN_HERE}
+      - Telegram__Bots__0__Transport=${BOT_TRANSPORT:-LongPolling}
+      - Telegram__Queue__Backend=RabbitMq
+      - Telegram__Queue__RabbitMqConnectionString=amqp://guest:guest@rabbitmq:5672/
+      - Telegram__Webhook__SecretToken=${WEBHOOK_SECRET:-}
+      - Telegram__Observability__EnablePrometheusExporter=true
+      - Telegram__Observability__PrometheusPort=9464
+    ports:
+      - "8080:8080"
+      - "9464:9464"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - telegram-net
+    restart: unless-stopped
+
+  sender:
+    build:
+      context: ..
+      dockerfile: services/TeleForge.Sender/Dockerfile
+    container_name: telegram-sender
+    environment:
+      - Telegram__Bots__0__Key=main
+      - Telegram__Bots__0__Token=${BOT_TOKEN:-YOUR_BOT_TOKEN_HERE}
+      - Telegram__Queue__Backend=RabbitMq
+      - Telegram__Queue__RabbitMqConnectionString=amqp://guest:guest@rabbitmq:5672/
+      - Telegram__Observability__EnablePrometheusExporter=true
+      - Telegram__Observability__PrometheusPort=9465
+    ports:
+      - "8081:8081"
+      - "9465:9465"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - telegram-net
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: telegram-rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - telegram-net
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: telegram-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - telegram-net
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: telegram-framework-prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - telegram-net
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    container_name: telegram-framework-grafana
+    depends_on:
+      - prometheus
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    networks:
+      - telegram-net
+    restart: unless-stopped
+
+networks:
+  telegram-net:
+    driver: bridge
+
+volumes:
+  rabbitmq-data:
+  redis-data:
+  prometheus-data:
+  grafana-data:

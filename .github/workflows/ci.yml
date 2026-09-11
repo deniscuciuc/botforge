@@ -1,0 +1,125 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.x'
+      - uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-fmt-${{ hashFiles('Directory.Packages.props') }}
+          restore-keys: nuget-fmt-
+      - run: dotnet restore
+      - run: dotnet format --verify-no-changes --no-restore
+
+  build-and-test:
+    name: Build & test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        # Windows is not redundant: YAML template path resolution and the file-watching
+        # behind template reload differ there.
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # MinVer needs the full history to compute a version.
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.x'
+      - uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ matrix.os }}-${{ hashFiles('Directory.Packages.props') }}
+          restore-keys: nuget-${{ matrix.os }}-
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      # The integration suite needs Docker (RabbitMQ, Redis) and runs in its own job.
+      - name: Test (unit)
+        run: >-
+          dotnet test --no-build --configuration Release
+          --filter "FullyQualifiedName!~Integration"
+          --collect:"XPlat Code Coverage" --results-directory ./coverage
+
+      - uses: codecov/codecov-action@v7
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          directory: ./coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+
+  integration:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.x'
+      - uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-integration-${{ hashFiles('Directory.Packages.props') }}
+          restore-keys: nuget-integration-
+      # Testcontainers starts RabbitMQ and Redis; WireMock stands in for the Telegram API.
+      - name: Test (integration)
+        run: dotnet test tests/TeleForge.Integration.Tests --configuration Release
+
+  pack:
+    name: Pack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.x'
+      - run: dotnet pack --configuration Release --output ./artifacts
+
+      # Packing is opt-in, and this is what proves it stayed that way: a test project or
+      # example that accidentally becomes packable shows up here and nowhere else.
+      - name: Assert the exact set of packages
+        run: |
+          set -euo pipefail
+          actual=$(cd artifacts && ls *.nupkg | sed 's/\.[0-9].*//' | sort | tr '\n' ' ')
+          expected="TeleForge.Analyzers TeleForge.Consumer TeleForge.Contracts TeleForge.Core TeleForge.Hosting TeleForge.Messaging TeleForge.Messaging.Abstractions TeleForge.Messaging.MassTransit TeleForge.Observability TeleForge.Payments TeleForge.Payments.Abstractions TeleForge.Payments.Crypto TeleForge.Payments.Fragment TeleForge.RateLimiting.Abstractions TeleForge.RateLimiting.Redis TeleForge.Routing TeleForge.Routing.Abstractions TeleForge.Streaming TeleForge.Templates TeleForge.Templates.DotNet TeleForge.TestUtilities "
+          if [ "$actual" != "$expected" ]; then
+            echo "::error::Unexpected package set."
+            echo "expected: $expected"
+            echo "actual:   $actual"
+            exit 1
+          fi
+          # Analyzers and the dotnet-new template pack ship no lib/ output, so they have
+          # no symbol package: 21 packages, 19 symbol packages.
+          test "$(ls artifacts/*.snupkg | wc -l)" -eq 19

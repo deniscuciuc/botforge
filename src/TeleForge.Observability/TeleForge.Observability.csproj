@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>OpenTelemetry metrics for TeleForge, exported over a standalone Prometheus listener.</Description>
+        <PackageTags>telegram;telegram-bot;bot;observability;opentelemetry;prometheus;metrics</PackageTags>
+        <RootNamespace>TeleForge.Observability</RootNamespace>
+        <!--
+          NU5104 warns that a stable package should not depend on a prerelease one. The
+          OpenTelemetry Prometheus exporters have never had a stable release — every version
+          ever published is -beta — so the only alternatives are to ship no Prometheus
+          exporter at all or to suppress this. It is called out in the README so nobody is
+          surprised by a prerelease appearing in their dependency graph.
+        -->
+        <NoWarn>$(NoWarn);NU5104</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\TeleForge.Core\TeleForge.Core.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting"/>
+        <PackageReference Include="OpenTelemetry.Exporter.Prometheus.HttpListener"/>
+    </ItemGroup>
+
+</Project>

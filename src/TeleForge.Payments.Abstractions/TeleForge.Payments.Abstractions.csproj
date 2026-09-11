@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Payment contracts for TeleForge: invoices, typed payloads, pre-checkout and refund contexts, anti-fraud checks and payout providers.</Description>
+        <PackageTags>telegram;telegram-bot;bot;payments;telegram-stars;abstractions</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\TeleForge.Core\TeleForge.Core.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+    </ItemGroup>
+</Project>

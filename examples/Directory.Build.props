@@ -1,0 +1,22 @@
+<Project>
+
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"/>
+
+    <PropertyGroup>
+        <!--
+          Without this every example bot packs: EchoBot.nupkg, CryptoShop.nupkg and thirteen
+          more. services/ already set it; examples/ did not.
+        -->
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(UsingMicrosoftNETSdkWeb)' != 'true'">
+        <Content Include="appsettings.json" Condition="Exists('appsettings.json')">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="appsettings.*.json" Condition="Exists('appsettings.Development.json')" Exclude="appsettings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>

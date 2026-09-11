@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>YAML message templates for TeleForge with conditionals, loops, partials, formatters, an emoji registry and keyboard definitions — so message copy changes without a redeploy.</Description>
+        <PackageTags>telegram;telegram-bot;bot;templates;yaml;localization</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\TeleForge.Core\TeleForge.Core.csproj"/>
+        <ProjectReference Include="..\TeleForge.Messaging.Abstractions\TeleForge.Messaging.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="YamlDotNet"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Physical"/>
+    </ItemGroup>
+</Project>

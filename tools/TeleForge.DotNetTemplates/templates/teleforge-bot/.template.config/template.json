@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Denis Cuciuc",
+  "classifications": [
+    "Telegram",
+    "Bot",
+    "TeleForge"
+  ],
+  "identity": "TeleForge.BotProject",
+  "name": "TeleForge Telegram Bot",
+  "shortName": "teleforge-bot",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "TeleForgeBot",
+  "preferNameDirectory": true,
+  "symbols": {
+    "UsePayments": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Include Telegram Star payments support"
+    },
+    "UseTemplates": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include YAML template engine"
+    },
+    "UseObservability": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Include OpenTelemetry + Prometheus metrics setup"
+    },
+    "ConsumerMode": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "polling",
+          "description": "Long polling (development)"
+        },
+        {
+          "choice": "webhook",
+          "description": "Webhook (production)"
+        }
+      ],
+      "defaultValue": "polling",
+      "description": "Update consumer mode"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!UsePayments)",
+          "exclude": [
+            "Handlers/PaymentHandler.cs"
+          ]
+        }
+      ]
+    }
+  ]
+}

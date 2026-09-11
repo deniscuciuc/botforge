@@ -1,0 +1,19 @@
+version: "3.9"
+
+# Monolith override — runs Ingress in single-process mode without RabbitMQ.
+# Usage: docker compose -f docker-compose.yml -f docker-compose.monolith.yml up ingress
+
+services:
+  ingress:
+    environment:
+      - Telegram__Queue__Backend=InMemory
+      - Telegram__Queue__RabbitMqConnectionString=
+    depends_on: {}
+
+  sender:
+    profiles:
+      - disabled
+
+  rabbitmq:
+    profiles:
+      - disabled

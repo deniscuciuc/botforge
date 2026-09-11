@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\TeleForge.Messaging\TeleForge.Messaging.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Routing\TeleForge.Routing.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Consumer\TeleForge.Consumer.csproj"/>
+    </ItemGroup>
+</Project>

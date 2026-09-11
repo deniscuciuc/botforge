@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Outbound messaging contracts for TeleForge: the message service, queue backend and send middleware.</Description>
+        <PackageTags>telegram;telegram-bot;bot;messaging;abstractions</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\TeleForge.Core\TeleForge.Core.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+    </ItemGroup>
+</Project>

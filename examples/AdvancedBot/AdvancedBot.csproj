@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\TeleForge.Messaging\TeleForge.Messaging.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Routing\TeleForge.Routing.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Consumer\TeleForge.Consumer.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Messaging.MassTransit\TeleForge.Messaging.MassTransit.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.RateLimiting.Redis\TeleForge.RateLimiting.Redis.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Observability\TeleForge.Observability.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="MassTransit.RabbitMQ"/>
+        <PackageReference Include="StackExchange.Redis"/>
+    </ItemGroup>
+</Project>

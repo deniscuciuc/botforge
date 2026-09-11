@@ -1,0 +1,61 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TeleForge.Consumer/TeleForge.Consumer.csproj" />
+    <Project Path="src/TeleForge.Contracts/TeleForge.Contracts.csproj" />
+    <Project Path="src/TeleForge.Core/TeleForge.Core.csproj" />
+    <Project Path="src/TeleForge.Hosting/TeleForge.Hosting.csproj" />
+    <Project Path="src/TeleForge.Messaging.Abstractions/TeleForge.Messaging.Abstractions.csproj" />
+    <Project Path="src/TeleForge.Messaging/TeleForge.Messaging.csproj" />
+    <Project Path="src/TeleForge.Messaging.MassTransit/TeleForge.Messaging.MassTransit.csproj" />
+    <Project Path="src/TeleForge.Observability/TeleForge.Observability.csproj" />
+    <Project Path="src/TeleForge.Payments.Abstractions/TeleForge.Payments.Abstractions.csproj" />
+    <Project Path="src/TeleForge.Payments/TeleForge.Payments.csproj" />
+    <Project Path="src/TeleForge.Payments.Crypto/TeleForge.Payments.Crypto.csproj" />
+    <Project Path="src/TeleForge.Payments.Fragment/TeleForge.Payments.Fragment.csproj" />
+    <Project Path="src/TeleForge.RateLimiting.Abstractions/TeleForge.RateLimiting.Abstractions.csproj" />
+    <Project Path="src/TeleForge.RateLimiting.Redis/TeleForge.RateLimiting.Redis.csproj" />
+    <Project Path="src/TeleForge.Routing.Abstractions/TeleForge.Routing.Abstractions.csproj" />
+    <Project Path="src/TeleForge.Routing/TeleForge.Routing.csproj" />
+    <Project Path="src/TeleForge.Streaming/TeleForge.Streaming.csproj" />
+    <Project Path="src/TeleForge.Templates/TeleForge.Templates.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TeleForge.Docs.Snippets/TeleForge.Docs.Snippets.csproj" />
+    <Project Path="tests/TeleForge.Payments.Tests/TeleForge.Payments.Tests.csproj" />
+    <Project Path="tests/TeleForge.Core.Tests/TeleForge.Core.Tests.csproj" />
+    <Project Path="tests/TeleForge.Integration.Tests/TeleForge.Integration.Tests.csproj" />
+    <Project Path="tests/TeleForge.Messaging.Tests/TeleForge.Messaging.Tests.csproj" />
+    <Project Path="tests/TeleForge.Routing.Tests/TeleForge.Routing.Tests.csproj" />
+    <Project Path="tests/TeleForge.Streaming.Tests/TeleForge.Streaming.Tests.csproj" />
+    <Project Path="tests/TeleForge.Templates.Tests/TeleForge.Templates.Tests.csproj" />
+    <Project Path="tests/TeleForge.TestUtilities/TeleForge.TestUtilities.csproj" />
+  </Folder>
+  <Folder Name="/examples/">
+    <Project Path="examples/AdvancedBot/AdvancedBot.csproj" />
+    <Project Path="examples/CommandBot/CommandBot.csproj" />
+    <Project Path="examples/ConversationBot/ConversationBot.csproj" />
+    <Project Path="examples/CryptoShop/CryptoShop.csproj" />
+    <Project Path="examples/DiceMiniGames/DiceMiniGames.csproj" />
+    <Project Path="examples/EchoBot/EchoBot.csproj" />
+    <Project Path="examples/GiftCommerceBot/GiftCommerceBot.csproj" />
+    <Project Path="examples/InlineBot/InlineBot.csproj" />
+    <Project Path="examples/InlineKeyboardBot/InlineKeyboardBot.csproj" />
+    <Project Path="examples/MediaBot/MediaBot.csproj" />
+    <Project Path="examples/MultiLanguageBot/MultiLanguageBot.csproj" />
+    <Project Path="examples/RequestSelectionBot/RequestSelectionBot.csproj" />
+    <Project Path="examples/StreamingBot/StreamingBot.csproj" />
+    <Project Path="examples/TelegramShop/TelegramShop.csproj" />
+    <Project Path="examples/WebhookBot/WebhookBot.csproj" />
+  </Folder>
+  <Folder Name="/services/">
+    <Project Path="services/TeleForge.Ingress/TeleForge.Ingress.csproj" />
+    <Project Path="services/TeleForge.Sender/TeleForge.Sender.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/TeleForge.Analyzers/TeleForge.Analyzers.csproj" />
+    <Project Path="tools/TeleForge.ApiProbe/TeleForge.ApiProbe.csproj" />
+    <Project Path="tools/TeleForge.DotNetTemplates/TeleForge.DotNetTemplates.csproj" />
+    <Project Path="tools/TeleForge.Mcp/TeleForge.Mcp.csproj" />
+    <Project Path="tools/TeleForge.Templates.Benchmarks/TeleForge.Templates.Benchmarks.csproj" />
+  </Folder>
+</Solution>

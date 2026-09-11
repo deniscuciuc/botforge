@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\TeleForge.Core\TeleForge.Core.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Contracts\TeleForge.Contracts.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Hosting\TeleForge.Hosting.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Messaging\TeleForge.Messaging.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Messaging.Abstractions\TeleForge.Messaging.Abstractions.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Messaging.MassTransit\TeleForge.Messaging.MassTransit.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Routing\TeleForge.Routing.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.Consumer\TeleForge.Consumer.csproj"/>
+        <ProjectReference Include="..\..\src\TeleForge.RateLimiting.Redis\TeleForge.RateLimiting.Redis.csproj"/>
+        <ProjectReference Include="..\TeleForge.TestUtilities\TeleForge.TestUtilities.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="NSubstitute"/>
+        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="Testcontainers"/>
+        <PackageReference Include="Testcontainers.RabbitMq"/>
+        <PackageReference Include="Testcontainers.Redis"/>
+        <PackageReference Include="WireMock.Net"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="MassTransit.RabbitMQ"/>
+    </ItemGroup>
+
+</Project>

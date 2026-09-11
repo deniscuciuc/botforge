@@ -1,0 +1,23 @@
+<Project>
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"/>
+
+    <PropertyGroup>
+        <!-- Roslyn analyzers and dotnet-new template packs must target netstandard2.0. -->
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <!-- Tools are not a public library API surface. -->
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <!--
+          Only TeleForge.Analyzers and TeleForge.Templates.DotNet ship. ApiProbe, Mcp and the
+          benchmarks are development tools and opt out by inheriting this.
+        -->
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <!-- The two shipped tool packages inherit PackageIcon from the root; supply the file. -->
+    <ItemGroup Condition="'$(IsPackable)' == 'true'">
+        <None Include="$(MSBuildThisFileDirectory)../assets/icon.png" Pack="true" PackagePath="" Visible="false"
+              Condition="Exists('$(MSBuildThisFileDirectory)../assets/icon.png')" />
+    </ItemGroup>
+
+</Project>

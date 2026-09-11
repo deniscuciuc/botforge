@@ -1,0 +1,35 @@
+Name: main_menu
+ParseMode: Html
+Text:
+  Translations:
+    en: '<tg-emoji emoji-id="5395601891781224729">✨</tg-emoji> <b>Main Menu</b>
+
+      Choose an option:'
+Buttons:
+  - Text:
+      Translations:
+        en: "Categories"
+    Type: Callback
+    Value: "menu:categories"
+    Style: Primary
+    IconCustomEmojiId: "5395601891781224729"
+    Row: 0
+    Order: 0
+  - Text:
+      Translations:
+        en: "About"
+    Type: Callback
+    Value: "menu:about"
+    Style: Success
+    IconCustomEmojiId: "5395468751107323455"
+    Row: 0
+    Order: 1
+  - Text:
+      Translations:
+        en: "Settings"
+    Type: Callback
+    Value: "menu:settings"
+    Style: Danger
+    IconCustomEmojiId: "5395442837040320048"
+    Row: 1
+    Order: 0

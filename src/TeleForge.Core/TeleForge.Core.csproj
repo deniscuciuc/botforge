@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Core abstractions for TeleForge: the update context, middleware contract, bot client provider and send result. Every other TeleForge package builds on this one.</Description>
+        <PackageTags>telegram;telegram-bot;bot;framework;abstractions</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+    </ItemGroup>
+</Project>

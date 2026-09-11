@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Denis Cuciuc",
+  "classifications": [
+    "Telegram",
+    "Handler",
+    "TeleForge"
+  ],
+  "identity": "TeleForge.Handler",
+  "name": "TeleForge Telegram Handler",
+  "shortName": "teleforge-handler",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "sourceName": "MyHandler",
+  "symbols": {
+    "HandlerType": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "command",
+          "description": "Command handler (/start, /help)"
+        },
+        {
+          "choice": "callback",
+          "description": "Callback query handler"
+        },
+        {
+          "choice": "text",
+          "description": "Text message handler"
+        },
+        {
+          "choice": "media",
+          "description": "Media message handler"
+        }
+      ],
+      "defaultValue": "command",
+      "description": "Type of handler to generate"
+    }
+  }
+}
