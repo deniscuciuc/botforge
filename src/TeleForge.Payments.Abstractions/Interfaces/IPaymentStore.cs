@@ -21,6 +21,13 @@ public interface IPaymentStore
     Task UpdatePayoutStatusAsync(string payoutId, PayoutStatus status, string? transactionId, string? error,
         CancellationToken ct = default);
 
+    // Anti-fraud
+    /// <summary>
+    /// Counts payouts requested by a user since a point in time. Used by
+    /// <c>VelocityCheck</c> to enforce per-hour and per-day limits.
+    /// </summary>
+    Task<int> CountPayoutsSinceAsync(long userId, DateTimeOffset since, CancellationToken ct = default);
+
     // Star transactions
     Task SaveStarTransactionsAsync(IEnumerable<StarTransactionRecord> transactions, CancellationToken ct = default);
     Task<DateTimeOffset?> GetLastTransactionSyncDateAsync(string botId, CancellationToken ct = default);

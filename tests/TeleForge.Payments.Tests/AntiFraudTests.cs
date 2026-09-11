@@ -161,14 +161,104 @@ public sealed class AntiFraudTests
     }
 
     [Fact]
-    public async Task VelocityCheck_IsAHook_AndAlwaysPasses_WithoutAStore()
+    public async Task Velocity_FailsClosed_WhenNoStoreIsRegistered()
     {
-        // Documented behaviour: the framework provides the seam, the application supplies
-        // the query. This test exists so that turning it into a real check is a visible,
-        // deliberate change rather than a silent one.
+        // Registering a velocity check states an intent to limit payouts. Passing everything
+        // because the store is missing would be the worst possible failure for a control
+        // that exists to stop money leaving.
         var check = new VelocityCheck(Options.Create(new VelocityCheckOptions()));
 
-        Assert.True((await check.EvaluateAsync(Context(int.MaxValue))).Passed);
+        var result = await check.EvaluateAsync(Context(100));
+
+        Assert.False(result.Passed);
+        Assert.Equal("antifraud_velocity_unavailable", result.TemplateKey);
+    }
+
+    [Fact]
+    public async Task Velocity_Passes_WhenUnderBothLimits()
+    {
+        var check = new VelocityCheck(
+            Options.Create(new VelocityCheckOptions { MaxPerHour = 5, MaxPerDay = 20 }),
+            StoreReturning(hourly: 2, daily: 7));
+
+        Assert.True((await check.EvaluateAsync(Context(100))).Passed);
+    }
+
+    [Fact]
+    public async Task Velocity_Fails_OnTheHourlyLimit()
+    {
+        var check = new VelocityCheck(
+            Options.Create(new VelocityCheckOptions { MaxPerHour = 5, MaxPerDay = 20 }),
+            StoreReturning(hourly: 5, daily: 5));
+
+        var result = await check.EvaluateAsync(Context(100));
+
+        Assert.False(result.Passed);
+        Assert.Equal("antifraud_velocity_hourly", result.TemplateKey);
+    }
+
+    [Fact]
+    public async Task Velocity_Fails_OnTheDailyLimit()
+    {
+        var check = new VelocityCheck(
+            Options.Create(new VelocityCheckOptions { MaxPerHour = 5, MaxPerDay = 20 }),
+            StoreReturning(hourly: 1, daily: 20));
+
+        var result = await check.EvaluateAsync(Context(100));
+
+        Assert.False(result.Passed);
+        Assert.Equal("antifraud_velocity_daily", result.TemplateKey);
+    }
+
+    [Fact]
+    public async Task Velocity_TreatsTheLimitAsExclusive()
+    {
+        // At exactly one below the limit the payout still goes through; the limit is the
+        // first rejected value, not the last accepted one.
+        var check = new VelocityCheck(
+            Options.Create(new VelocityCheckOptions { MaxPerHour = 5, MaxPerDay = 20 }),
+            StoreReturning(hourly: 4, daily: 19));
+
+        Assert.True((await check.EvaluateAsync(Context(100))).Passed);
+    }
+
+    [Fact]
+    public async Task Velocity_ChecksTheHourWindowBeforeTheDayWindow()
+    {
+        // Cheaper, more specific window first: a user over the hourly limit should not cost
+        // a second store round-trip.
+        var store = StoreReturning(hourly: 99, daily: 0);
+
+        await new VelocityCheck(
+            Options.Create(new VelocityCheckOptions { MaxPerHour = 5, MaxPerDay = 20 }), store)
+            .EvaluateAsync(Context(100));
+
+        await store.Received(1).CountPayoutsSinceAsync(
+            Arg.Any<long>(), Arg.Any<DateTimeOffset>(), Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async Task Velocity_RejectsANullContext()
+    {
+        var check = new VelocityCheck(Options.Create(new VelocityCheckOptions()));
+
+        await Assert.ThrowsAsync<ArgumentNullException>(() => check.EvaluateAsync(null!));
+    }
+
+    /// <summary>
+    /// A store whose payout count depends on how far back the window reaches: the hourly
+    /// query asks for one hour, the daily query for a day.
+    /// </summary>
+    private static IPaymentStore StoreReturning(int hourly, int daily)
+    {
+        var store = Substitute.For<IPaymentStore>();
+        store.CountPayoutsSinceAsync(Arg.Any<long>(), Arg.Any<DateTimeOffset>(), Arg.Any<CancellationToken>())
+            .Returns(call =>
+            {
+                var since = call.ArgAt<DateTimeOffset>(1);
+                return DateTimeOffset.UtcNow - since > TimeSpan.FromHours(2) ? daily : hourly;
+            });
+        return store;
     }
 
     private static IAntiFraudCheck Check(string name, bool pass, string reason = "failed")

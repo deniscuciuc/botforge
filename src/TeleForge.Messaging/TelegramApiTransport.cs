@@ -66,16 +66,19 @@ public class TelegramApiTransport(
                     return SendResult.Ok(msg.ChatId, msg.EditMessageId.Value);
                 }
 
+                // Named arguments deliberately: Telegram.Bot inserts parameters into the
+                // middle of these overloads between releases, and positional arguments bind
+                // silently to the wrong ones.
                 var edited = await client.EditMessageText(
-                    new ChatId(msg.ChatId),
-                    msg.EditMessageId.Value,
-                    textContent?.Text ?? string.Empty,
-                    textParseMode,
-                    inlineKeyboard,
-                    linkPreviewOptions,
-                    textContent?.Entities,
-                    msg.BusinessConnectionId,
-                    context.CancellationToken).ConfigureAwait(false);
+                    chatId: new ChatId(msg.ChatId),
+                    messageId: msg.EditMessageId.Value,
+                    text: textContent?.Text ?? string.Empty,
+                    parseMode: textParseMode,
+                    replyMarkup: inlineKeyboard,
+                    linkPreviewOptions: linkPreviewOptions,
+                    entities: textContent?.Entities,
+                    businessConnectionId: msg.BusinessConnectionId,
+                    cancellationToken: context.CancellationToken).ConfigureAwait(false);
 
                 return SendResult.Ok(msg.ChatId, edited.Id);
             }

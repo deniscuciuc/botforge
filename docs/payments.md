@@ -287,8 +287,16 @@ builder.Services.AddAntiFraudCheck<VelocityCheck>();
 
 | Check | Options | Description |
 |-------|---------|-------------|
-| `AmountLimitCheck` | `MinAmount`, `MaxAmount`, `MaxDailyTotal` | Validates amount bounds |
-| `VelocityCheck` | `MaxPerHour`, `MaxPerDay` | Rate-limits payout requests |
+| `AmountLimitCheck` | `MinAmount`, `MaxAmount` | Rejects a payout outside the bounds. Both are inclusive. |
+| `VelocityCheck` | `MaxPerHour`, `MaxPerDay` | Rejects a payout once the user has already requested this many in a rolling window. |
+
+`VelocityCheck` counts through `IPaymentStore.CountPayoutsSinceAsync`, so it needs an
+`IPaymentStore` registered. **If none is registered it fails rather than passes** — you asked
+for a payout limit, and silently approving everything because the store is missing is the
+worst outcome for a control that exists to stop money leaving.
+
+The pipeline stops at the first failing check, so order matters: register the cheap checks
+first.
 
 ### Custom Checks
 

@@ -5,9 +5,11 @@ namespace TeleForge.Payments.AntiFraud;
 
 public class AmountLimitCheckOptions
 {
+    /// <summary>Smallest payout amount allowed, inclusive.</summary>
     public int MinAmount { get; set; } = 1;
+
+    /// <summary>Largest payout amount allowed, inclusive.</summary>
     public int MaxAmount { get; set; } = int.MaxValue;
-    public int MaxDailyTotal { get; set; } = int.MaxValue;
 }
 
 /// <summary>

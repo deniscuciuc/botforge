@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-11
+
+### Breaking
+
+- **`VelocityCheck` now enforces its limits instead of always passing.** It was a stub: it
+  returned `Pass()` unconditionally, so a deployment that registered it believed payouts were
+  rate-limited when nothing was checked. It now counts recent payouts and rejects over the
+  hourly or daily limit, and **fails rather than passes when no `IPaymentStore` is
+  registered** — silently approving everything because the store is missing is the worst
+  outcome for a control that exists to stop money leaving.
+- `IPaymentStore` gains `CountPayoutsSinceAsync(userId, since, ct)`, the query `VelocityCheck`
+  needs. Implementers must add it.
+- `AmountLimitCheckOptions.MaxDailyTotal` is removed. It was never read — a knob that looked
+  like a spending cap and enforced nothing. A daily cap belongs with a store-backed check.
+
+### Changed
+
+- Dependencies brought current, including `Telegram.Bot` 22.10.3, `YamlDotNet` 18.1.0,
+  `Testcontainers` 4.15.0, `WireMock.Net` 2.15.0, `Spectre.Console` 0.57.2,
+  `ModelContextProtocol` 2.2.0 and `Microsoft.Extensions.*` 10.0.12.
+- **MassTransit is pinned to 8.5.8 deliberately.** Version 9 dropped Apache-2.0 for a
+  proprietary licence, the same move MediatR made at v13. 8.5.8 is the last Apache-2.0
+  release. Do not let a dependency update cross that line without a decision.
+- `EditMessageText` is now called with named arguments. Telegram.Bot 22.10 inserted a
+  parameter into the middle of that overload; positional arguments had bound silently to the
+  wrong ones.
+- The Prometheus exporter replaced `UriPrefixes` with `Host`/`Port` plus a
+  `ConfigureHttpListener` callback. `TelegramObservabilityOptions.PrometheusUriPrefixes` is
+  unchanged and now maps onto the callback, because prefixes express things `Host`/`Port`
+  cannot, such as binding every interface with `+`.
+
+### Added
+
+- Six tests for `VelocityCheck` covering both windows, the exclusive-limit boundary, the
+  fail-closed path, and that the hourly window is checked before the daily one.
+
 ## [0.1.0] - 2026-09-11
 
 Initial release. A Telegram bot framework for .NET across 21 packages: attribute routing, a
@@ -81,5 +117,6 @@ for the Telegram API. Nothing talks to the real Telegram API and no bot token is
 - `TeleForge.Hosting`, `TeleForge.Consumer`, `TeleForge.Observability`, the rate-limiting
   packages and the development tools under `tools/` have no dedicated test projects yet.
 
-[Unreleased]: https://github.com/deniscuciuc/teleforge/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/deniscuciuc/teleforge/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/deniscuciuc/teleforge/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/deniscuciuc/teleforge/releases/tag/v0.1.0

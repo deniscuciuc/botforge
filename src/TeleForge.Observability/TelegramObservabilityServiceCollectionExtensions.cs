@@ -53,7 +53,15 @@ public static class TelegramObservabilityServiceCollectionExtensions
         if (options.EnablePrometheusExporter)
             builder.AddPrometheusHttpListener(httpListener =>
             {
-                httpListener.UriPrefixes = options.PrometheusUriPrefixes;
+                // The exporter replaced its UriPrefixes property with Host/Port plus this
+                // escape hatch. Prefixes stay the public option here because they express
+                // things Host/Port cannot, such as binding to every interface with "+".
+                httpListener.ConfigureHttpListener = (_, listener) =>
+                {
+                    listener.Prefixes.Clear();
+                    foreach (var prefix in options.PrometheusUriPrefixes)
+                        listener.Prefixes.Add(prefix);
+                };
             });
     }
 }
